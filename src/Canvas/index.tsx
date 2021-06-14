@@ -2,12 +2,9 @@ import { useEffect, useRef } from 'react';
 import Ball from './Ball';
 import { customReqAnimFrame } from './helpers';
 
-const BALL_COUNT = 100;
-const BALL_NUMBER = 40;
+const BALL_NUMBER = 10;
 const BALL_COLOR = '#70CDFF';
 const BACK_COLOR = '#f9f9f9';
-const GRAVITY_X = 0;
-const GRAVITY_Y = 0.5;
 const BALL_SIZE = 60;
 
 const Canvas = () => {
