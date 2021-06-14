@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+  position: relative;
   max-width: 20vw;
+  user-select: none;
 `;
 
 export const Image = styled.img`
@@ -14,8 +16,8 @@ const activeDelta = '10px';
 
 export const ButtonWrapper = styled.div`
   position: absolute;
-  top: 46%;
-  left: 7.2%;
+  top: 62%;
+  left: 35%;
   z-index: 1;
 `;
 
@@ -57,4 +59,12 @@ export const Button = styled.button`
     border-radius: 50%;
     bottom: -25px;
   }
+`;
+
+export const CanvasElement = styled.canvas`
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: auto;
 `;

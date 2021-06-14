@@ -1,74 +1,70 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useState } from 'react';
 import Ball from './Ball';
 import { customReqAnimFrame } from './helpers';
 import * as CanvasStyles from './styles';
 
-const BALL_NUMBER = 10;
 const BALL_COLOR = '#70CDFF';
-const BACK_COLOR = '#f9f9f9';
-const BALL_SIZE = 60;
+const BALL_SIZE = 20;
+
+const WIDTH = 145;
+const HEIGHT = 185;
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const balls = useRef<Array<Ball>>([]);
+  const pixels = useRef(new Array(WIDTH * HEIGHT));
 
-  useEffect(() => {
+  function getContext() {
     const canvas = canvasRef.current;
-    if (!canvas) {
-      return;
-    }
-    const context = canvas.getContext('2d');
-    if (!context) {
-      return;
-    }
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
+    const context = canvas!.getContext('2d');
+    context!.fillStyle = '#ee8711';
+    context!.fillRect(0, 0, WIDTH, HEIGHT);
+    return context;
+  }
 
-    let balls: Array<Ball> = [];
+  function contextBallFilling(ballX: number, ballY: number) {
+    const context = getContext();
+    context!.beginPath();
+    context!.fillStyle = BALL_COLOR;
+    context!.arc(ballX, ballY, BALL_SIZE / 2, 0, Math.PI * 2, true);
+    context!.closePath();
+    context!.fill();
+  }
 
-    function contextBallFilling(ballX: number, ballY: number) {
-      context!.beginPath();
-      context!.fillStyle = BALL_COLOR;
-      context!.arc(ballX, ballY, BALL_SIZE / 2, 0, Math.PI * 2, true);
-      context!.closePath();
-      context!.fill();
-    }
+  function loop() {
+    getContext();
 
-    function loop() {
-      let pixels = new Array(width * height);
-      // background color
-      context!.fillStyle = BACK_COLOR;
-      context!.fillRect(0, 0, width, height);
+    const currentBall = balls.current[currentIndex];
+    const ballPosition = currentBall.tick(pixels.current);
+    contextBallFilling(ballPosition.x, ballPosition.y);
 
-      for (let i = 0; i < BALL_NUMBER; i++) {
-        // const ballPosition = balls[i].tick(pixels);
-        // pixels = ballPosition.pixels;
-        // contextBallFilling(ballPosition.x, ballPosition.y);
-      }
+    customReqAnimFrame(loop);
+  }
 
-      customReqAnimFrame(loop);
-    }
-
-    setTimeout(() => {
-      for (let i = 0; i < BALL_NUMBER; i++) {
-        balls[i] = new Ball(width, height);
-      }
-      loop();
-    }, 100);
-  }, []);
+  function handleButtonClick() {
+    const currentBall = new Ball(WIDTH, HEIGHT);
+    balls.current[currentIndex] = currentBall;
+    loop();
+    setCurrentIndex(currentIndex + 1);
+  }
 
   return (
     <CanvasStyles.Wrapper>
-      {/* <canvas ref={canvasRef}></canvas> */}
-      <CanvasStyles.Image src="vendingMachine.png" alt="Vending Machine" />
       <CanvasStyles.ButtonWrapper>
         <CanvasStyles.Button
           type="button"
+          onClick={handleButtonClick}
           className="machine-button"
           aria-label="Throw a ball"
         />
       </CanvasStyles.ButtonWrapper>
+      <CanvasStyles.Image src="vendingMachine.png" alt="Vending Machine" />
+      <CanvasStyles.CanvasElement
+        ref={canvasRef}
+        width={WIDTH}
+        height={HEIGHT}
+      />
     </CanvasStyles.Wrapper>
   );
 };
