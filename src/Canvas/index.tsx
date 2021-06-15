@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Scene from './Scene';
 import * as CanvasStyles from './styles';
+import { debounce } from './utils';
 
-const Canvas = () => {
+interface CanvasProps {
+  updateCounter(isButtonEvent: boolean, ball: number): void;
+}
+
+const Canvas = ({ updateCounter }: CanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const currentIndexRef = useRef(1);
   const animationRef = useRef<Scene | null>(null);
 
   useEffect(() => {
@@ -15,10 +20,20 @@ const Canvas = () => {
     animationRef.current = new Scene(canvas);
   }, []);
 
-  function handleButtonClick() {
-    setCurrentIndex(currentIndex + 1);
+  function notifyValuesToParent(isButtonEvent: boolean) {
+    const ballCount = animationRef.current?.getBallCount() ?? 0;
+    updateCounter(isButtonEvent, ballCount);
+  }
+
+  function updateBall() {
+    currentIndexRef.current += 1;
     animationRef.current?.createSingleBall();
-    console.log(animationRef.current?.getBallCount());
+    notifyValuesToParent(false);
+  }
+
+  function handleButtonClick() {
+    debounce(updateBall, 300);
+    notifyValuesToParent(true);
   }
 
   return (
