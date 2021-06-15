@@ -41,7 +41,6 @@ export const Button = styled.button`
     height: ${buttonHeight};
   }
 
-  &:focus,
   &:active {
     box-shadow: 0 0 0 4px rgb(210 47 45 / 40%);
   }

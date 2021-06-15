@@ -1,63 +1,25 @@
-import { useRef, useState } from 'react';
-import Ball from './Ball';
-import { customReqAnimFrame } from './helpers';
+import { useEffect, useRef, useState } from 'react';
+import Scene from './Scene';
 import * as CanvasStyles from './styles';
-
-const BALL_COLORS = ['#ff4e45', '#3ea6ff', '#909090'];
-const BALL_SIZE = 20;
-const BALL_NUMBER = 10;
 
 const WIDTH = 145;
 const HEIGHT = 185;
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const balls = useRef<Array<Ball>>([]);
-  const pixels = useRef(new Array(WIDTH * HEIGHT));
+  const [currentIndex, setCurrentIndex] = useState(1);
 
-  function getContext() {
+  useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas?.getContext('2d');
-    return context;
-  }
-
-  function contextBallFilling(ballX: number, ballY: number, index: number) {
-    const context = getContext();
-    if (!context) {
+    if (!canvas) {
       return;
     }
-    context.beginPath();
-    context.fillStyle = BALL_COLORS[index % BALL_COLORS.length];
-    context.arc(ballX, ballY, BALL_SIZE / 2, 0, Math.PI * 2, true);
-    context.closePath();
-    context.fill();
-  }
-
-  function loop() {
-    const context = getContext();
-    if (!context) {
-      return;
-    }
-    pixels.current = new Array(WIDTH * HEIGHT);
-    context.clearRect(0, 0, WIDTH, HEIGHT);
-
-    for (let i = 0; i < BALL_NUMBER; i += 1) {
-      const currentBall = balls.current[i];
-      const ballPosition = currentBall.tick(pixels.current);
-      pixels.current = ballPosition.pixels;
-      contextBallFilling(ballPosition.x, ballPosition.y, i);
-    }
-
-    customReqAnimFrame(loop);
-  }
+    const animation = new Scene(canvas);
+    animation.update();
+  }, []);
 
   function handleButtonClick() {
-    for (let i = 0; i < BALL_NUMBER; i += 1) {
-      balls.current[i] = new Ball(WIDTH, HEIGHT);
-    }
-    loop();
-    // setCurrentIndex(currentIndex + 1);
+    setCurrentIndex(currentIndex + 1);
   }
 
   return (
