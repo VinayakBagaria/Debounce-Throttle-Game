@@ -18,7 +18,7 @@ const Canvas = () => {
   function handleButtonClick() {
     setCurrentIndex(currentIndex + 1);
     animationRef.current?.createSingleBall();
-    console.log(animationRef.current?.ballCount);
+    console.log(animationRef.current?.getBallCount());
   }
 
   return (

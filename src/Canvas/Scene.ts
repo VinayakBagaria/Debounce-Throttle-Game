@@ -67,7 +67,7 @@ class Scene {
     this.balls.forEach((eachBall) => eachBall.draw(this.ctx));
   }
 
-  get ballCount() {
+  public getBallCount() {
     return this.balls.length;
   }
 }
