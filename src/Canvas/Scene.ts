@@ -22,31 +22,29 @@ class Scene {
     };
     this.canvas.width = this.config.width;
     this.canvas.height = this.config.height;
-
-    this.createBalls();
   }
 
   private createBalls() {
-    const balls: Array<Ball> = [];
-
     for (let i = 0; i < this.config.ballCount; i++) {
-      // random x, y positions
-      const x = Math.random() * this.config.width;
-      const y = Math.random() * this.config.height;
-
-      const sceneForBall = {
-        ...this.config,
-      };
-
-      const ballProps = {
-        color: getRandomBallColor(),
-      };
-
-      const ballInstance = new Ball(x, y, sceneForBall, ballProps);
-      balls.push(ballInstance);
+      this.createSingleBall();
     }
+  }
 
-    this.balls = balls;
+  public createSingleBall() {
+    // random x, y positions
+    const x = Math.random() * this.config.width;
+    const y = Math.random() * this.config.height;
+
+    const sceneForBall = {
+      ...this.config,
+    };
+
+    const ballProps = {
+      color: getRandomBallColor(),
+    };
+
+    const ballInstance = new Ball(x, y, sceneForBall, ballProps);
+    this.balls.push(ballInstance);
   }
 
   update() {

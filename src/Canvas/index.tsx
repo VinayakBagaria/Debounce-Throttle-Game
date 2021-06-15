@@ -8,18 +8,20 @@ const HEIGHT = 185;
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentIndex, setCurrentIndex] = useState(1);
+  const animationRef = useRef<Scene | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
-    const animation = new Scene(canvas);
-    animation.update();
+    animationRef.current = new Scene(canvas);
   }, []);
 
   function handleButtonClick() {
     setCurrentIndex(currentIndex + 1);
+    animationRef.current?.createSingleBall();
+    animationRef.current?.update();
   }
 
   return (
