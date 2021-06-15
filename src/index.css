@@ -14,3 +14,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #181818;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

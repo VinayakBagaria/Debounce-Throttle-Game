@@ -1,26 +1,38 @@
 import { useEffect, useRef } from 'react';
 import { useFunctions } from './hooks';
 import Scene from './Scene';
-import * as CanvasStyles from './styles';
+import { ReactComponent as ResetIcon } from './resetIcon.svg';
 import { Scenes } from './types';
+import * as CanvasStyles from './styles';
 
 interface CanvasProps {
   scene: Scenes;
   updateCounter(isButtonEvent: boolean, ball: number): void;
+  isResetState: boolean;
+  resetCounter(): void;
 }
 
-const Canvas = ({ scene, updateCounter }: CanvasProps) => {
+const Canvas = ({
+  scene,
+  updateCounter,
+  isResetState,
+  resetCounter,
+}: CanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const currentIndexRef = useRef(1);
   const animationRef = useRef<Scene | null>(null);
   const functions = useFunctions(updateBall, 1000);
 
-  useEffect(() => {
+  function setupScene() {
     const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
     animationRef.current = new Scene(canvas);
+  }
+
+  useEffect(() => {
+    setupScene();
   }, []);
 
   function notifyValuesToParent(isButtonEvent: boolean) {
@@ -45,6 +57,11 @@ const Canvas = ({ scene, updateCounter }: CanvasProps) => {
     notifyValuesToParent(true);
   }
 
+  function handleResetClick() {
+    setupScene();
+    resetCounter();
+  }
+
   return (
     <CanvasStyles.Wrapper>
       <CanvasStyles.ButtonWrapper>
@@ -54,6 +71,20 @@ const Canvas = ({ scene, updateCounter }: CanvasProps) => {
           aria-label="Throw a ball"
         />
       </CanvasStyles.ButtonWrapper>
+      {isResetState && (
+        <CanvasStyles.ResetContainer className="center">
+          <CanvasStyles.ResetButton
+            type="button"
+            className="center"
+            onClick={handleResetClick}
+            aria-label="Reset the machine"
+          >
+            <ResetIcon />
+            Reset the machine
+          </CanvasStyles.ResetButton>
+        </CanvasStyles.ResetContainer>
+      )}
+
       <CanvasStyles.Image src="vendingMachine.png" alt="Vending Machine" />
       <CanvasStyles.CanvasElement ref={canvasRef} />
     </CanvasStyles.Wrapper>

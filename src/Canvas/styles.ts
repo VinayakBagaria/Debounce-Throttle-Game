@@ -67,3 +67,33 @@ export const CanvasElement = styled.canvas`
   right: 0;
   margin: auto;
 `;
+
+export const ResetContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  z-index: 2;
+  background-color: rgba(23, 25, 28, 0.8);
+`;
+
+export const ResetButton = styled.button`
+  cursor: pointer;
+  padding: 2rem;
+  background-color: transparent;
+  border: 0;
+  color: #ddd;
+  font-weight: bold;
+  flex-direction: column;
+  font-size: 1.1rem;
+  svg {
+    height: 36px;
+    width: 36px;
+    margin-bottom: 0.75rem;
+    path {
+      stroke: #ddd;
+    }
+  }
+`;

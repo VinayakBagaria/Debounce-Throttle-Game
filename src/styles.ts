@@ -5,12 +5,12 @@ export const Wrapper = styled.div`
 `;
 
 export const EachSection = styled.section`
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
 `;
 
 export const Heading = styled.h2`
   color: #ddd;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
   text-align: center;
   font-size: 2.4rem;
 `;

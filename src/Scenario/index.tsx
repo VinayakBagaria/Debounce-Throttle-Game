@@ -8,8 +8,12 @@ interface ScenarioProps {
   scene: Scenes;
 }
 
+const INITIAL_STATE = { button: 0, ball: 0 };
+
+const MAX_BALLS = 30;
+
 const Scenario = ({ scene }: ScenarioProps) => {
-  const [values, setValues] = useState({ button: 0, ball: 0 });
+  const [values, setValues] = useState(INITIAL_STATE);
 
   function handleUpdateCounter(isButtonEvent: boolean, ball: number) {
     setValues((prevState) => ({
@@ -18,9 +22,18 @@ const Scenario = ({ scene }: ScenarioProps) => {
     }));
   }
 
+  function handleResetCounter() {
+    setValues(INITIAL_STATE);
+  }
+
   return (
     <SceneStyles.Wrapper>
-      <Canvas scene={scene} updateCounter={handleUpdateCounter} />
+      <Canvas
+        scene={scene}
+        updateCounter={handleUpdateCounter}
+        isResetState={values.ball === MAX_BALLS}
+        resetCounter={handleResetCounter}
+      />
       <Counter buttonCounter={values.button} eventCounter={values.ball} />
     </SceneStyles.Wrapper>
   );

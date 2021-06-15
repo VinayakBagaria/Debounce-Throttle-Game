@@ -23,12 +23,7 @@ class Scene {
     };
     this.canvas.width = this.config.width;
     this.canvas.height = this.config.height;
-  }
-
-  private createBalls() {
-    for (let i = 0; i < this.config.ballCount; i++) {
-      this.createSingleBall();
-    }
+    this.update();
   }
 
   public createSingleBall() {
