@@ -16,7 +16,7 @@ const Slider = ({ legendName, timer, onChange }: SliderProps) => (
       max="2000"
       step="100"
       value={timer}
-      onChange={(event) => onChange(parseInt(event.target.value, 10))}
+      onChange={event => onChange(parseInt(event.target.value, 10))}
     />
   </SliderStyles.FieldSet>
 );

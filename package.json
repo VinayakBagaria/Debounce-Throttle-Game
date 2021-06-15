@@ -24,12 +24,6 @@
     "eject": "react-scripts eject",
     "tsc": "tsc"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -43,6 +37,7 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.10"
+    "@types/styled-components": "^5.1.10",
+    "prettier": "^2.3.1"
   }
 }

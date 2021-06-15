@@ -20,10 +20,10 @@ const SCENARIOS = [
   },
 ];
 
-function App() {
+const App = () => {
   return (
     <AppStyles.Wrapper>
-      {SCENARIOS.map((eachScenario) => (
+      {SCENARIOS.map(eachScenario => (
         <AppStyles.EachSection key={eachScenario.scene}>
           <AppStyles.Heading>{eachScenario.name}</AppStyles.Heading>
           <Scenario
@@ -34,6 +34,6 @@ function App() {
       ))}
     </AppStyles.Wrapper>
   );
-}
+};
 
 export default App;

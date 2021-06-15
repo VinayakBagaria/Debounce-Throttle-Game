@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { useFunctions } from './hooks';
 import Scene from './Scene';
 import { ReactComponent as ResetIcon } from './resetIcon.svg';
+import { useFunctions } from './hooks';
 import { Scenes } from './types';
 import * as CanvasStyles from './styles';
 
