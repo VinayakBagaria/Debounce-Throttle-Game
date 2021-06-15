@@ -1,11 +1,8 @@
-const BALL_SIZE = 60;
+const BALL_SIZE = 20;
 const GRAVITY_X = 0;
 const GRAVITY_Y = 0.5;
 const BOUNCINESS = 0.8;
 const FRICTION = 1.01;
-const WALL_STICK = false;
-const WALL_BOUNCE = true;
-const STICKINESS = 50;
 
 class Ball {
   private width: number;
@@ -35,51 +32,23 @@ class Ball {
     this.y += this.fy;
 
     if (this.x < BALL_SIZE * 0.5) {
-      if (WALL_STICK) {
-        this.x = BALL_SIZE * 0.5;
-        this.fy /= FRICTION * STICKINESS;
-      } else if (WALL_BOUNCE) {
-        this.x = BALL_SIZE * 0.5;
-        this.fx = this.fx * -1 * BOUNCINESS;
-        this.fy /= FRICTION;
-      } else {
-        this.dx += BALL_SIZE * 0.5 - this.x;
-      }
+      this.x = BALL_SIZE * 0.5;
+      this.fx = this.fx * -1 * BOUNCINESS;
+      this.fy /= FRICTION;
     } else if (this.x > this.width - BALL_SIZE * 0.5) {
-      if (WALL_STICK) {
-        this.x = this.width - BALL_SIZE * 0.5;
-        this.fy /= FRICTION * STICKINESS;
-      } else if (WALL_BOUNCE) {
-        this.x = this.width - BALL_SIZE * 0.5;
-        this.fx = this.fx * -1 * BOUNCINESS;
-        this.fy /= FRICTION;
-      } else {
-        this.dx -= this.x - this.width + BALL_SIZE * 0.5;
-      }
+      this.x = this.width - BALL_SIZE * 0.5;
+      this.fx = this.fx * -1 * BOUNCINESS;
+      this.fy /= FRICTION;
     }
 
     if (this.y < BALL_SIZE * 0.5) {
-      if (WALL_STICK) {
-        this.y = BALL_SIZE * 0.5;
-        this.fx /= FRICTION * STICKINESS;
-      } else if (WALL_BOUNCE) {
-        this.y = BALL_SIZE * 0.5;
-        this.fy = this.fy * -1 * BOUNCINESS;
-        this.fx /= FRICTION;
-      } else {
-        this.dy += BALL_SIZE * 0.5 - this.y;
-      }
+      this.y = BALL_SIZE * 0.5;
+      this.fy = this.fy * -1 * BOUNCINESS;
+      this.fx /= FRICTION;
     } else if (this.y > this.height - BALL_SIZE * 0.5) {
-      if (WALL_STICK) {
-        this.y = this.height - BALL_SIZE * 0.5;
-        this.fx /= FRICTION * STICKINESS;
-      } else if (WALL_BOUNCE) {
-        this.y = this.height - BALL_SIZE * 0.5;
-        this.fy = this.fy * -1 * BOUNCINESS;
-        this.fx /= FRICTION;
-      } else {
-        this.dy -= this.y - this.height + BALL_SIZE * 0.5;
-      }
+      this.y = this.height - BALL_SIZE * 0.5;
+      this.fy = this.fy * -1 * BOUNCINESS;
+      this.fx /= FRICTION;
     }
 
     const inwidth = Math.round(this.x / BALL_SIZE);
@@ -105,10 +74,11 @@ class Ball {
       }
     }
 
-    if (!pixels[inheight * this.width + inwidth]) {
-      pixels[inheight * this.width + inwidth] = [this];
+    const pixelsIndex = inheight * this.width + inwidth;
+    if (!pixels[pixelsIndex]) {
+      pixels[pixelsIndex] = [this];
     } else {
-      pixels[inheight * this.width + inwidth].push(this);
+      pixels[pixelsIndex].push(this);
     }
 
     this.x += this.dx;

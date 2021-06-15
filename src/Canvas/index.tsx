@@ -5,6 +5,7 @@ import * as CanvasStyles from './styles';
 
 const BALL_COLOR = '#70CDFF';
 const BALL_SIZE = 20;
+const BALL_NUMBER = 10;
 
 const WIDTH = 145;
 const HEIGHT = 185;
@@ -17,36 +18,47 @@ const Canvas = () => {
 
   function getContext() {
     const canvas = canvasRef.current;
-    const context = canvas!.getContext('2d');
-    context!.fillStyle = '#ee8711';
-    context!.fillRect(0, 0, WIDTH, HEIGHT);
+    const context = canvas?.getContext('2d');
     return context;
   }
 
   function contextBallFilling(ballX: number, ballY: number) {
     const context = getContext();
-    context!.beginPath();
-    context!.fillStyle = BALL_COLOR;
-    context!.arc(ballX, ballY, BALL_SIZE / 2, 0, Math.PI * 2, true);
-    context!.closePath();
-    context!.fill();
+    if (!context) {
+      return;
+    }
+    context.beginPath();
+    context.fillStyle = BALL_COLOR;
+    context.arc(ballX, ballY, BALL_SIZE / 2, 0, Math.PI * 2, true);
+    context.closePath();
+    context.fill();
   }
 
   function loop() {
-    getContext();
+    const context = getContext();
+    if (!context) {
+      return;
+    }
+    pixels.current = new Array(WIDTH * HEIGHT);
+    context.fillStyle = '#000';
+    context.fillRect(0, 0, WIDTH, HEIGHT);
 
-    const currentBall = balls.current[currentIndex];
-    const ballPosition = currentBall.tick(pixels.current);
-    contextBallFilling(ballPosition.x, ballPosition.y);
+    for (let i = 0; i < BALL_NUMBER; i += 1) {
+      const currentBall = balls.current[i];
+      const ballPosition = currentBall.tick(pixels.current);
+      pixels.current = ballPosition.pixels;
+      contextBallFilling(ballPosition.x, ballPosition.y);
+    }
 
     customReqAnimFrame(loop);
   }
 
   function handleButtonClick() {
-    const currentBall = new Ball(WIDTH, HEIGHT);
-    balls.current[currentIndex] = currentBall;
+    for (let i = 0; i < BALL_NUMBER; i += 1) {
+      balls.current[i] = new Ball(WIDTH, HEIGHT);
+    }
     loop();
-    setCurrentIndex(currentIndex + 1);
+    // setCurrentIndex(currentIndex + 1);
   }
 
   return (
