@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: relative;
-  max-width: 20vw;
+  max-width: 25vw;
   user-select: none;
 `;
 
@@ -16,8 +16,8 @@ const activeDelta = '10px';
 
 export const ButtonWrapper = styled.div`
   position: absolute;
-  top: 62%;
-  left: 35%;
+  top: 66%;
+  left: 37%;
   z-index: 1;
 `;
 
@@ -63,7 +63,7 @@ export const Button = styled.button`
 
 export const CanvasElement = styled.canvas`
   position: absolute;
-  top: 20%;
+  top: 26%;
   left: 0;
   right: 0;
   margin: auto;

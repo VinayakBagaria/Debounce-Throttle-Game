@@ -3,7 +3,7 @@ import Ball from './Ball';
 import { customReqAnimFrame } from './helpers';
 import * as CanvasStyles from './styles';
 
-const BALL_COLOR = '#70CDFF';
+const BALL_COLORS = ['#ff4e45', '#3ea6ff', '#909090'];
 const BALL_SIZE = 20;
 const BALL_NUMBER = 10;
 
@@ -22,13 +22,13 @@ const Canvas = () => {
     return context;
   }
 
-  function contextBallFilling(ballX: number, ballY: number) {
+  function contextBallFilling(ballX: number, ballY: number, index: number) {
     const context = getContext();
     if (!context) {
       return;
     }
     context.beginPath();
-    context.fillStyle = BALL_COLOR;
+    context.fillStyle = BALL_COLORS[index % BALL_COLORS.length];
     context.arc(ballX, ballY, BALL_SIZE / 2, 0, Math.PI * 2, true);
     context.closePath();
     context.fill();
@@ -40,14 +40,13 @@ const Canvas = () => {
       return;
     }
     pixels.current = new Array(WIDTH * HEIGHT);
-    context.fillStyle = '#000';
-    context.fillRect(0, 0, WIDTH, HEIGHT);
+    context.clearRect(0, 0, WIDTH, HEIGHT);
 
     for (let i = 0; i < BALL_NUMBER; i += 1) {
       const currentBall = balls.current[i];
       const ballPosition = currentBall.tick(pixels.current);
       pixels.current = ballPosition.pixels;
-      contextBallFilling(ballPosition.x, ballPosition.y);
+      contextBallFilling(ballPosition.x, ballPosition.y, i);
     }
 
     customReqAnimFrame(loop);

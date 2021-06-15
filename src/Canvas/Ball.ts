@@ -17,8 +17,8 @@ class Ball {
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
+    this.x = Math.max(BALL_SIZE + Math.random() * width, width - BALL_SIZE);
+    this.y = 0;
     this.fx = 0;
     this.fy = 0;
     this.dx = 0;
