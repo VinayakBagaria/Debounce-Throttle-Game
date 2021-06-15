@@ -30,6 +30,7 @@ export function useFunctions(callback: Function, duration: number) {
   const throttleFunction = useThrottle(callback, duration);
 
   return {
+    normalFunction: callback,
     debounceFunction,
     throttleFunction,
   };

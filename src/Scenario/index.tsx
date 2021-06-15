@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import Canvas from '../Canvas';
 import Counter from './Counter';
+import { Scenes } from '../Canvas/types';
 import * as SceneStyles from './styles';
 
-const Scenario = () => {
+interface ScenarioProps {
+  scene: Scenes;
+}
+
+const Scenario = ({ scene }: ScenarioProps) => {
   const [values, setValues] = useState({ button: 0, ball: 0 });
 
   function handleUpdateCounter(isButtonEvent: boolean, ball: number) {
@@ -15,7 +20,7 @@ const Scenario = () => {
 
   return (
     <SceneStyles.Wrapper>
-      <Canvas updateCounter={handleUpdateCounter} />
+      <Canvas scene={scene} updateCounter={handleUpdateCounter} />
       <Counter buttonCounter={values.button} eventCounter={values.ball} />
     </SceneStyles.Wrapper>
   );

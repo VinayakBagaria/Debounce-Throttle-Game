@@ -2,12 +2,14 @@ import { useEffect, useRef } from 'react';
 import { useFunctions } from './hooks';
 import Scene from './Scene';
 import * as CanvasStyles from './styles';
+import { Scenes } from './types';
 
 interface CanvasProps {
+  scene: Scenes;
   updateCounter(isButtonEvent: boolean, ball: number): void;
 }
 
-const Canvas = ({ updateCounter }: CanvasProps) => {
+const Canvas = ({ scene, updateCounter }: CanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const currentIndexRef = useRef(1);
   const animationRef = useRef<Scene | null>(null);
@@ -33,7 +35,13 @@ const Canvas = ({ updateCounter }: CanvasProps) => {
   }
 
   function handleButtonClick() {
-    functions.throttleFunction();
+    if (scene === Scenes.Debounce) {
+      functions.debounceFunction();
+    } else if (scene === Scenes.Throttle) {
+      functions.throttleFunction();
+    } else {
+      functions.normalFunction();
+    }
     notifyValuesToParent(true);
   }
 
