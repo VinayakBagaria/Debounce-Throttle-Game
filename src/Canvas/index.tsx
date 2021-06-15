@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
+import { useFunctions } from './hooks';
 import Scene from './Scene';
 import * as CanvasStyles from './styles';
-import { debounce } from './utils';
 
 interface CanvasProps {
   updateCounter(isButtonEvent: boolean, ball: number): void;
@@ -11,8 +11,7 @@ const Canvas = ({ updateCounter }: CanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const currentIndexRef = useRef(1);
   const animationRef = useRef<Scene | null>(null);
-
-  const debounceRef = useRef(debounce(updateBall, 4000));
+  const functions = useFunctions(updateBall, 1000);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -21,12 +20,6 @@ const Canvas = ({ updateCounter }: CanvasProps) => {
     }
     animationRef.current = new Scene(canvas);
   }, []);
-
-  useEffect(() => {
-    return () => {
-      debounceRef.current.clear();
-    };
-  });
 
   function notifyValuesToParent(isButtonEvent: boolean) {
     const ballCount = animationRef.current?.getBallCount() ?? 0;
@@ -40,7 +33,7 @@ const Canvas = ({ updateCounter }: CanvasProps) => {
   }
 
   function handleButtonClick() {
-    debounceRef.current.implementation();
+    functions.throttleFunction();
     notifyValuesToParent(true);
   }
 
