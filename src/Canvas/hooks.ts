@@ -10,7 +10,7 @@ function useDebounce(callback: Function, duration: number) {
     };
   }, []);
 
-  return debounceRef.current.implementation;
+  return debounceRef.current;
 }
 
 function useThrottle(callback: Function, duration: number) {
@@ -22,16 +22,22 @@ function useThrottle(callback: Function, duration: number) {
     };
   }, []);
 
-  return throttleRef.current.implementation;
+  return throttleRef.current;
 }
 
 export function useFunctions(callback: Function, duration: number) {
-  const debounceFunction = useDebounce(callback, duration);
-  const throttleFunction = useThrottle(callback, duration);
+  const debounceRef = useDebounce(callback, duration);
+  const throttleRef = useThrottle(callback, duration);
+
+  function killTimers() {
+    debounceRef.clear();
+    throttleRef.clear();
+  }
 
   return {
     normalFunction: callback,
-    debounceFunction,
-    throttleFunction,
+    debounceFunction: debounceRef.implementation,
+    throttleFunction: throttleRef.implementation,
+    killTimers,
   };
 }

@@ -60,6 +60,7 @@ const Canvas = ({
   function handleResetClick() {
     setupScene();
     resetCounter();
+    functions.killTimers();
   }
 
   return (
