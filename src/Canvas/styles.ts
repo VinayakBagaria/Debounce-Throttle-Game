@@ -17,7 +17,7 @@ const activeDelta = '10px';
 export const ButtonWrapper = styled.div`
   position: absolute;
   top: 66%;
-  left: 37%;
+  left: 38%;
   z-index: 1;
 `;
 
