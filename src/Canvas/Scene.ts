@@ -7,6 +7,7 @@ class Scene {
   private ctx: CanvasRenderingContext2D;
   private config: SceneConfigType;
   private balls: Array<Ball> = [];
+  private animationFrame: number = 0;
 
   constructor(canvas: HTMLCanvasElement, config?: Partial<SceneConfigType>) {
     this.canvas = canvas;
@@ -33,7 +34,7 @@ class Scene {
   public createSingleBall() {
     // random x, y positions
     const x = Math.random() * this.config.width;
-    const y = Math.random() * this.config.height;
+    const y = 0;
 
     const sceneForBall = {
       ...this.config,
@@ -45,11 +46,16 @@ class Scene {
 
     const ballInstance = new Ball(x, y, sceneForBall, ballProps);
     this.balls.push(ballInstance);
+
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+    }
+    this.update();
   }
 
-  update() {
+  private update() {
     // queue the next update
-    window.requestAnimationFrame(() => this.update());
+    this.animationFrame = window.requestAnimationFrame(() => this.update());
 
     // clear the canvas
     this.ctx.clearRect(0, 0, this.config.width, this.config.height);
@@ -59,6 +65,10 @@ class Scene {
 
     // draw objects
     this.balls.forEach((eachBall) => eachBall.draw(this.ctx));
+  }
+
+  get ballCount() {
+    return this.balls.length;
   }
 }
 

@@ -23,10 +23,8 @@ class Ball {
     this.sceneProps = sceneProps;
 
     const defaultVelocityProps = {
-      startVelX:
-        (Math.random() * 5 + 5) * (Math.floor(Math.random() * 2) || -1),
-      startVelY:
-        (Math.random() * 5 + 5) * (Math.floor(Math.random() * 2) || -1),
+      startVelX: 10,
+      startVelY: 10,
     };
     this.props = {
       ...defaultBallConfig,
