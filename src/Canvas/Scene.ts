@@ -30,7 +30,7 @@ class Scene {
     const balls: Array<Ball> = [];
 
     for (let i = 0; i < this.config.ballCount; i++) {
-      // random x,y positions
+      // random x, y positions
       const x = Math.random() * this.config.width;
       const y = Math.random() * this.config.height;
 
