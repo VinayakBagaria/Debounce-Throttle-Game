@@ -12,6 +12,8 @@ const Canvas = ({ updateCounter }: CanvasProps) => {
   const currentIndexRef = useRef(1);
   const animationRef = useRef<Scene | null>(null);
 
+  const debounceRef = useRef(debounce(updateBall, 4000));
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
@@ -19,6 +21,12 @@ const Canvas = ({ updateCounter }: CanvasProps) => {
     }
     animationRef.current = new Scene(canvas);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      debounceRef.current.clear();
+    };
+  });
 
   function notifyValuesToParent(isButtonEvent: boolean) {
     const ballCount = animationRef.current?.getBallCount() ?? 0;
@@ -32,7 +40,7 @@ const Canvas = ({ updateCounter }: CanvasProps) => {
   }
 
   function handleButtonClick() {
-    debounce(updateBall, 300);
+    debounceRef.current.implementation();
     notifyValuesToParent(true);
   }
 

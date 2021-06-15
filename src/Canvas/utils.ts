@@ -7,12 +7,21 @@ export function getRandomBallColor() {
 export function debounce(func: Function, duration: number) {
   let timeout: NodeJS.Timeout | null;
 
-  return (...args: Array<any>) => {
+  function clear() {
     if (timeout) {
       clearTimeout(timeout);
     }
+  }
+
+  function implementation(...args: Array<any>) {
+    clear();
     timeout = setTimeout(() => {
       func.apply(this, args);
     }, duration);
+  }
+
+  return {
+    clear,
+    implementation,
   };
 }
