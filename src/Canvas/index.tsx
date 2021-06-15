@@ -23,6 +23,13 @@ const Canvas = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const currentIndexRef = useRef(1);
   const animationRef = useRef<Scene | null>(null);
+
+  function updateBall() {
+    currentIndexRef.current += 1;
+    animationRef.current?.createSingleBall();
+    notifyValuesToParent(false);
+  }
+
   const functions = useFunctions(updateBall, timer);
 
   function setupScene() {
@@ -40,12 +47,6 @@ const Canvas = ({
   function notifyValuesToParent(isButtonEvent: boolean) {
     const ballCount = animationRef.current?.getBallCount() ?? 0;
     updateCounter(isButtonEvent, ballCount);
-  }
-
-  function updateBall() {
-    currentIndexRef.current += 1;
-    animationRef.current?.createSingleBall();
-    notifyValuesToParent(false);
   }
 
   function handleButtonClick() {
