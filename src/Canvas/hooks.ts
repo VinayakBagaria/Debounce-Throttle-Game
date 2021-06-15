@@ -5,10 +5,11 @@ function useDebounce(callback: Function, duration: number) {
   const debounceRef = useRef(debounce(callback, duration));
 
   useEffect(() => {
+    debounceRef.current = debounce(callback, duration);
     return () => {
       debounceRef.current.clear();
     };
-  }, []);
+  }, [duration]);
 
   return debounceRef.current;
 }
@@ -17,10 +18,11 @@ function useThrottle(callback: Function, duration: number) {
   const throttleRef = useRef(throttle(callback, duration));
 
   useEffect(() => {
+    throttleRef.current = throttle(callback, duration);
     return () => {
       throttleRef.current.clear();
     };
-  }, []);
+  }, [duration]);
 
   return throttleRef.current;
 }

@@ -8,3 +8,10 @@ export const Wrapper = styled.div`
     margin-right: 3rem;
   }
 `;
+
+export const RightSide = styled.div`
+  width: 400px;
+  > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+`;

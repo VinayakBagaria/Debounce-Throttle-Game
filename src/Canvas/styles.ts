@@ -26,7 +26,7 @@ export const Button = styled.button`
   height: 30px;
   width: 85px;
   border-radius: 50%;
-  background-color: rgb(255, 77, 77);
+  background-color: rgba(255, 77, 77);
   border: 0;
   &::before,
   &::after {

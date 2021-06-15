@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Wrapper = styled.table`
   border-collapse: collapse;
-  width: 400px;
   tr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }

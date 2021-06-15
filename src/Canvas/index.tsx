@@ -6,6 +6,7 @@ import { Scenes } from './types';
 import * as CanvasStyles from './styles';
 
 interface CanvasProps {
+  timer: number;
   scene: Scenes;
   updateCounter(isButtonEvent: boolean, ball: number): void;
   isResetState: boolean;
@@ -13,6 +14,7 @@ interface CanvasProps {
 }
 
 const Canvas = ({
+  timer,
   scene,
   updateCounter,
   isResetState,
@@ -21,7 +23,7 @@ const Canvas = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const currentIndexRef = useRef(1);
   const animationRef = useRef<Scene | null>(null);
-  const functions = useFunctions(updateBall, 1000);
+  const functions = useFunctions(updateBall, timer);
 
   function setupScene() {
     const canvas = canvasRef.current;
