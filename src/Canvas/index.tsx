@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import Scene from './Scene';
 import { ReactComponent as ResetIcon } from './resetIcon.svg';
-import { useFunctions } from './hooks';
-import { Scenes } from './types';
+import useFunctions from './hooks';
+import { Scenes } from './scenarioConstants';
 import * as CanvasStyles from './styles';
 
 interface CanvasProps {
@@ -24,6 +24,11 @@ const Canvas = ({
   const currentIndexRef = useRef(1);
   const animationRef = useRef<Scene | null>(null);
 
+  function notifyValuesToParent(isButtonEvent: boolean) {
+    const ballCount = animationRef.current?.getBallCount() ?? 0;
+    updateCounter(isButtonEvent, ballCount);
+  }
+
   function updateBall() {
     currentIndexRef.current += 1;
     animationRef.current?.createSingleBall();
@@ -43,11 +48,6 @@ const Canvas = ({
   useEffect(() => {
     setupScene();
   }, []);
-
-  function notifyValuesToParent(isButtonEvent: boolean) {
-    const ballCount = animationRef.current?.getBallCount() ?? 0;
-    updateCounter(isButtonEvent, ballCount);
-  }
 
   function handleButtonClick() {
     if (scene === Scenes.Debounce) {

@@ -27,7 +27,7 @@ function useThrottle(callback: Function, duration: number) {
   return throttleRef.current;
 }
 
-export function useFunctions(callback: Function, duration: number) {
+function useFunctions(callback: Function, duration: number) {
   const debounceRef = useDebounce(callback, duration);
   const throttleRef = useThrottle(callback, duration);
 
@@ -50,3 +50,5 @@ export function useFunctions(callback: Function, duration: number) {
     killTimers,
   };
 }
+
+export default useFunctions;

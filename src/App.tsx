@@ -1,31 +1,8 @@
 import Header from './Header';
 import Scenario from './Scenario';
-import { Scenes } from './Canvas/types';
+import { SCENARIOS } from './Canvas/scenarioConstants';
 import * as AppStyles from './styles';
 import { useTheme } from './hooks';
-
-const SCENARIOS = [
-  {
-    name: "Let's throw a ball normally!",
-    scene: Scenes.Normal,
-    sliderLabel: null,
-  },
-  {
-    name: 'Throttle',
-    scene: Scenes.Throttle,
-    sliderLabel: 'Throttle options',
-  },
-  {
-    name: 'Debounce',
-    scene: Scenes.Debounce,
-    sliderLabel: 'Debounce options',
-  },
-  {
-    name: 'Request Animation Frame',
-    scene: Scenes.Raf,
-    sliderLabel: null,
-  },
-];
 
 const App = () => {
   const { theme, inverseTheme, wrapperRef } = useTheme();

@@ -23,25 +23,23 @@ interface CounterProps {
   eventCounter: number;
 }
 
-const Counter = ({ buttonCounter, eventCounter }: CounterProps) => {
-  return (
-    <Wrapper>
-      <tbody>
-        <tr>
-          <TableData>Button clicked:</TableData>
-          <TableData data-type="counter">
-            <strong>{buttonCounter} time(s)</strong>
-          </TableData>
-        </tr>
-        <tr>
-          <TableData>Event handler called:</TableData>
-          <TableData data-type="counter">
-            <strong>{eventCounter} time(s)</strong>
-          </TableData>
-        </tr>
-      </tbody>
-    </Wrapper>
-  );
-};
+const Counter = ({ buttonCounter, eventCounter }: CounterProps) => (
+  <Wrapper>
+    <tbody>
+      <tr>
+        <TableData>Button clicked:</TableData>
+        <TableData data-type="counter">
+          <strong>{buttonCounter} time(s)</strong>
+        </TableData>
+      </tr>
+      <tr>
+        <TableData>Event handler called:</TableData>
+        <TableData data-type="counter">
+          <strong>{eventCounter} time(s)</strong>
+        </TableData>
+      </tr>
+    </tbody>
+  </Wrapper>
+);
 
 export default Counter;

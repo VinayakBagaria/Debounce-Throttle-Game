@@ -7,6 +7,12 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["airbnb-typescript", "prettier"],
   "rules": {
-    "react/jsx-curly-newline": "off"
+    "react/jsx-curly-newline": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ]
   }
 }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Canvas from '../Canvas';
 import Counter from './Counter';
 import Slider from '../Slider';
-import { Scenes } from '../Canvas/types';
+import { Scenes } from '../Canvas/scenarioConstants';
 import * as SceneStyles from './styles';
 
 interface ScenarioProps {
@@ -19,7 +19,7 @@ const Scenario = ({ scene, sliderLabel }: ScenarioProps) => {
   const [timer, setTimer] = useState(500);
 
   function handleUpdateCounter(isButtonEvent: boolean, ball: number) {
-    setValues((prevState) => ({
+    setValues(prevState => ({
       button: prevState.button + (isButtonEvent ? 1 : 0),
       ball,
     }));
@@ -44,7 +44,7 @@ const Scenario = ({ scene, sliderLabel }: ScenarioProps) => {
           <Slider
             legendName={sliderLabel}
             timer={timer}
-            onChange={(newTimer) => setTimer(newTimer)}
+            onChange={newTimer => setTimer(newTimer)}
           />
         )}
       </SceneStyles.RightSide>
