@@ -2,6 +2,7 @@ import {
   SceneConfigType,
   BallConfigType,
   defaultBallConfig,
+  defaultVelocityProps,
 } from './constants';
 
 class Ball {
@@ -22,10 +23,6 @@ class Ball {
     this.y = y;
     this.sceneProps = sceneProps;
 
-    const defaultVelocityProps = {
-      startVelX: 10,
-      startVelY: 10,
-    };
     this.props = {
       ...defaultBallConfig,
       ...defaultVelocityProps,
@@ -50,8 +47,11 @@ class Ball {
 
     // floor
     if (this.y + props.radius >= sceneProps.height) {
+      // reverse direction and loose energy from bouncing
       this.velY *= -props.bounce;
+      // reset position
       this.y = sceneProps.height - props.radius;
+      // slow down ball's X velocity with friction
       this.velX *= sceneProps.friction;
     }
 

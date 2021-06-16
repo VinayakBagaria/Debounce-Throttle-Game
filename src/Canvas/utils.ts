@@ -55,3 +55,7 @@ export function throttle(func: Function, duration: number) {
     implementation,
   };
 }
+
+export function getRandomArbitrary(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}

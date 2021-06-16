@@ -1,6 +1,6 @@
 import Ball from './Ball';
 import { defaultSceneConfig, SceneConfigType } from './constants';
-import { getRandomBallColor } from './utils';
+import { getRandomBallColor, getRandomArbitrary } from './utils';
 
 class Scene {
   private canvas: HTMLCanvasElement;
@@ -28,7 +28,10 @@ class Scene {
 
   public createSingleBall() {
     // random x, y positions
-    const x = Math.random() * this.config.width;
+    const x = getRandomArbitrary(
+      0.3 * this.config.width,
+      0.7 * this.config.width
+    );
     const y = 0;
 
     const sceneForBall = {
@@ -56,10 +59,10 @@ class Scene {
     this.ctx.clearRect(0, 0, this.config.width, this.config.height);
 
     // update objects
-    this.balls.forEach((eachBall) => eachBall.update());
+    this.balls.forEach(eachBall => eachBall.update());
 
     // draw objects
-    this.balls.forEach((eachBall) => eachBall.draw(this.ctx));
+    this.balls.forEach(eachBall => eachBall.draw(this.ctx));
   }
 
   public getBallCount() {

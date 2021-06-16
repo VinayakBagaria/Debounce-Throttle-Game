@@ -24,3 +24,8 @@ export const defaultBallConfig = {
 };
 
 export type BallConfigType = typeof defaultBallConfig;
+
+export const defaultVelocityProps = {
+  startVelX: 2,
+  startVelY: 6,
+};
