@@ -84,7 +84,7 @@ export const ResetButton = styled.button`
   padding: 2rem;
   background-color: transparent;
   border: 0;
-  color: #ddd;
+  color: var(--text-color);
   font-weight: bold;
   flex-direction: column;
   font-size: 1.1rem;
@@ -93,7 +93,7 @@ export const ResetButton = styled.button`
     width: 36px;
     margin-bottom: 0.75rem;
     path {
-      stroke: #ddd;
+      stroke: var(--text-color);
     }
   }
 `;
