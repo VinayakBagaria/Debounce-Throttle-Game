@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 export const FieldSet = styled.fieldset`
-  border: 1px solid rgb(46, 50, 56);
+  border: 1px solid var(--slider-track);
   padding: 1.2rem 1rem 1rem;
 `;
 
 export const Legend = styled.legend`
-  color: hsl(217, 10%, 60%);
+  color: var(--subtext-color);
   padding: 0 0.25rem;
   font-weight: 600;
 `;
 
 export const Label = styled.label`
-  color: lightgray;
-  font-size: 1rem;
+  color: var(--text-color);
+  font-size: 0.88rem;
   padding-bottom: 0.6rem;
   display: block;
 `;
@@ -23,7 +23,7 @@ export const Input = styled.input`
   width: 100%;
   background: transparent;
   &::-webkit-slider-runnable-track {
-    background-color: rgb(46, 50, 56);
+    background-color: var(--slider-track);
     height: 0.25rem;
     border-radius: 2rem;
   }

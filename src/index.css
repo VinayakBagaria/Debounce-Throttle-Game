@@ -19,6 +19,8 @@ body {
 
   --body-background: #fff;
   --text-color: rgb(36, 30, 30);
+  --subtext-color: hsl(217, 10%, 45%);
+  --slider-track: rgb(233, 234, 237);
 }
 
 [data-theme='dark'] {
@@ -28,6 +30,8 @@ body {
 
   --body-background: #181818;
   --text-color: #ddd;
+  --subtext-color: hsl(217, 10%, 60%);
+  --slider-track: rgb(46, 50, 56);
 }
 
 .center {

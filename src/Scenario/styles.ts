@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const RightSide = styled.div`
-  width: 400px;
+  width: 350px;
   > *:not(:last-child) {
     margin-bottom: 1.5rem;
   }

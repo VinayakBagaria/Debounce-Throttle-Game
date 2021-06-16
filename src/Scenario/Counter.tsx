@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.table`
+  width: 100%;
   border-collapse: collapse;
   tr {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--slider-track);
   }
 `;
 
 const TableData = styled.td`
-  color: darkgrey;
+  color: var(--text-color);
   padding: 12px 6px;
   &[data-type='counter'] {
     display: flex;
     justify-content: flex-end;
-    color: whitesmoke;
+    color: var(--text-color);
   }
 `;
 
