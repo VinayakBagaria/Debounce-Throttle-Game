@@ -10,7 +10,7 @@ const Wrapper = styled.table`
 
 const TableData = styled.td`
   color: var(--text-color);
-  padding: 12px 6px;
+  padding: 10px 6px;
   &[data-type='counter'] {
     display: flex;
     justify-content: flex-end;
