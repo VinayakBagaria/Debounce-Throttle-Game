@@ -20,6 +20,11 @@ const SCENARIOS = [
     scene: Scenes.Debounce,
     sliderLabel: 'Debounce options',
   },
+  {
+    name: 'Request Animation Frame',
+    scene: Scenes.Raf,
+    sliderLabel: null,
+  },
 ];
 
 const App = () => {

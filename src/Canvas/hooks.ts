@@ -31,6 +31,12 @@ export function useFunctions(callback: Function, duration: number) {
   const debounceRef = useDebounce(callback, duration);
   const throttleRef = useThrottle(callback, duration);
 
+  function rafFunction() {
+    requestAnimationFrame(() => {
+      callback();
+    });
+  }
+
   function killTimers() {
     debounceRef.clear();
     throttleRef.clear();
@@ -40,6 +46,7 @@ export function useFunctions(callback: Function, duration: number) {
     normalFunction: callback,
     debounceFunction: debounceRef.implementation,
     throttleFunction: throttleRef.implementation,
+    rafFunction,
     killTimers,
   };
 }

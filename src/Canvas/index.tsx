@@ -54,8 +54,10 @@ const Canvas = ({
       functions.debounceFunction();
     } else if (scene === Scenes.Throttle) {
       functions.throttleFunction();
-    } else {
+    } else if (scene === Scenes.Normal) {
       functions.normalFunction();
+    } else if (scene === Scenes.Raf) {
+      functions.rafFunction();
     }
     notifyValuesToParent(true);
   }
