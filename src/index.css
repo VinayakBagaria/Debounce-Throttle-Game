@@ -15,6 +15,18 @@ body {
   background-color: #181818;
 }
 
+:root {
+  --header-background: rgb(249, 249, 251);
+  --header-bottom: rgb(232, 236, 243);
+  --header-color: rgb(103, 112, 126);
+}
+
+[data-theme='dark'] {
+  --header-background: rgb(34, 37, 42);
+  --header-bottom: rgb(46, 50, 56);
+  --header-color: rgb(143, 151, 163);
+}
+
 .center {
   display: flex;
   justify-content: center;
