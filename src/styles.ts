@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 `;
 
 export const EachSection = styled.section`
-  margin-bottom: 8rem;
+  margin-bottom: 7rem;
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -14,7 +14,7 @@ export const EachSection = styled.section`
 
 export const Heading = styled.h2`
   color: var(--text-color);
-  margin-bottom: 2.4rem;
+  margin-bottom: 3rem;
   text-align: center;
   font-size: 2.4rem;
 `;
