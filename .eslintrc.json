@@ -13,6 +13,67 @@
       "error",
       "always",
       { "exceptAfterSingleLine": true }
-    ]
+    ],
+    /*
+    If a JS object has a setter for a property, make sure there exists a getter property to read it. Reverse may not be true.
+    */
+    "accessor-pairs": "off",
+    // allows omitting parens when there is only 1 arg
+    "arrow-parens": ["error", "as-needed"],
+    // spacing before and after the arrow
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    /*
+    requires trailing commas when last prop is in a diff line than closing ] or },
+    disallow trailing commas when last element is on the same line as a closing ] or }
+    */
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    // use dot notation whenever possible, like error on foo["bar"]
+    "dot-notation": "error",
+    // requires end of line always
+    "eol-last": "error",
+    // prefer using double quotes in jsx whenever possible
+    "jsx-quotes": ["error", "prefer-double"],
+    // no function declaration in nested blocks, such as inside if
+    "no-inner-declarations": ["error", "functions"],
+    // all named args must be used, and there must be no unused variables
+    "no-unused-vars": ["error", { "args": "after-used" }],
+    // unnecessary to concatenate two strings together
+    "no-useless-concat": "error",
+    /*
+    allow use of single quotes wherever possible
+    avoidEscape: var double = "a string containing "single" quotes"; is correct
+    */
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    // always require a space b/w func name and (
+    "space-before-function-paren": "error",
+
+    // React and JSX
+    // not use ={true} when passing truthy values as props
+    "react/jsx-boolean-value": ["error", "never"],
+    "react/boolean-prop-naming": [
+      "error",
+      {
+        "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+"
+      }
+    ],
+    "react/self-closing-comp": "error",
+    "react/no-unused-state": "error",
+    "@typescript-eslint/no-empty-function": "warn"
   }
 }
