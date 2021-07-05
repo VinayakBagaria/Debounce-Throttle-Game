@@ -8,7 +8,7 @@ import {
 class Ball {
   private x: number;
   private y: number;
-  private props: BallConfigType;
+  private ballProps: BallConfigType;
   private sceneProps: SceneConfigType;
   private velX: number;
   private velY: number;
@@ -23,55 +23,55 @@ class Ball {
     this.y = y;
     this.sceneProps = sceneProps;
 
-    this.props = {
+    this.ballProps = {
       ...defaultBallConfig,
       ...defaultVelocityProps,
       ...ballProps,
     };
 
-    this.velX = this.props.startVelX;
-    this.velY = this.props.startVelY;
+    this.velX = this.ballProps.startVelX;
+    this.velY = this.ballProps.startVelY;
   }
 
   public draw(ctx: CanvasRenderingContext2D) {
     ctx.save();
     ctx.beginPath();
-    ctx.fillStyle = this.props.color;
-    ctx.arc(this.x, this.y, this.props.radius / 2, 0, Math.PI * 2);
+    ctx.fillStyle = this.ballProps.color;
+    ctx.arc(this.x, this.y, this.ballProps.radius / 2, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
   }
 
   public update() {
-    const { props, sceneProps } = this;
+    const { ballProps, sceneProps } = this;
 
     // floor
-    if (this.y + props.radius >= sceneProps.height) {
+    if (this.y + ballProps.radius >= sceneProps.height) {
       // reverse direction and loose energy from bouncing
-      this.velY *= -props.bounce;
+      this.velY *= -ballProps.bounce;
       // reset position
-      this.y = sceneProps.height - props.radius;
+      this.y = sceneProps.height - ballProps.radius;
       // slow down ball's X velocity with friction
       this.velX *= sceneProps.friction;
     }
 
     // ceiling
-    if (this.y - props.radius <= 0) {
-      this.velY *= -props.bounce;
-      this.y = props.radius;
+    if (this.y - ballProps.radius <= 0) {
+      this.velY *= -ballProps.bounce;
+      this.y = ballProps.radius;
       this.velX *= sceneProps.friction;
     }
 
     // left wall
-    if (this.x - props.radius <= 0) {
-      this.velX *= -props.bounce;
-      this.x = props.radius;
+    if (this.x - ballProps.radius <= 0) {
+      this.velX *= -ballProps.bounce;
+      this.x = ballProps.radius;
     }
 
     // right wall
-    if (this.x + props.radius >= sceneProps.width) {
-      this.velX *= -props.bounce;
-      this.x = sceneProps.width - props.radius;
+    if (this.x + ballProps.radius >= sceneProps.width) {
+      this.velX *= -ballProps.bounce;
+      this.x = sceneProps.width - ballProps.radius;
     }
 
     // reset insignificant amounts to 0
